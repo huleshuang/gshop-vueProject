@@ -9,6 +9,7 @@ import Search from '../pages/Search/Search'
 Vue.use(VueRouter)
 
 export default new VueRouter({
+  model: 'history',
   routes: [
     {
       path: '/Msite',
