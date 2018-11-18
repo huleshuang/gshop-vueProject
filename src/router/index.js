@@ -10,12 +10,12 @@ import Login from '../pages/Login/Login'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  model: 'history',
+  model: 'history', //去掉请求路径中的 #
   routes: [
     {
       path: '/Msite',
       component: Msite,
-      meta: {
+      meta: {  //meta的设置 是为了footer底部判断是否显示
         showFooter: true
       }
     },

@@ -72,5 +72,15 @@ module.exports = {
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
+  },
+
+  proxyTable: { // 匹配所有以 '/api'开头的请求路径
+    '/api': {
+      target: 'http://localhost:3000', //代理设置的访问路径
+      changeOrigin: true, //支持跨域
+      pathRewrite: { // 重写路径: 去掉路径中开头的'/api'
+        '^/api': ''
+      }
+    }
   }
 }
