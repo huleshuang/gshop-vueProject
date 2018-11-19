@@ -1,7 +1,7 @@
 <template>
   <section class="msite">
     <!--首页头部-->
-    <TopHeader title="昌平区北七家宏福科技园(337省道北)">
+    <TopHeader :title="address.name">
       <span class="header_search" slot="search">
         <i class="iconfont icon-sousuo"></i>
       </span>
@@ -13,7 +13,7 @@
     <nav class="msite_nav">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
+          <div class="swiper-slide" categorys.len>
             <a href="javascript:" class="link_to_food">
               <div class="food_container">
                 <img src="./images/nav/1.jpg">
@@ -130,10 +130,33 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import ShopList from '../../components/ShopList/ShopList'
 export default {
+
+  data() {
+    return {
+      imgBaseUrl: 'https://fuss10.elemecdn.com'
+    }
+  },
+
   components: {
     ShopList
+  },
+
+  /**
+   * 处理异步请求 商品分类  商铺列表
+   */
+  mounted () {
+    this.$store.dispatch('getCategorys')
+    this.$store.dispatch('getShops')
+  },
+
+  /**
+   * 计算属性
+   */
+  computed: {
+    ...mapState(['address','categorys'])
   }
 }
 </script>

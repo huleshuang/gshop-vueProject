@@ -2,33 +2,36 @@
 import ajax from './ajax'
 
 /*
-  与后台交互模块
+  此模块与后台交互模块;包含n个接口函数的模块，是个对象
+  函数的返回值是 promise对象
+  下面设置的api会为了处理跨域的请求
  */
 
-//获取地址信息(根据经纬度)
-export const reqAddress = geohash => ajax('/api/position',{geohash})
+//获取地址信息(根据经纬度) params参数类型
+// export const reqAddress = (latitude,longitude) => ajax(`/api/position/${latitude},${longitude}`)
+export const reqAddress = geohash => ajax('/api/position/'+geohash)
 
-//获取msite页面食品分类列表
+//获取msite页面食品分类列表 query参数类型
 export const reqCategorys = () => ajax('/api/index_category')
 
-// 获取msite商铺列表(根据经纬度)
+// 获取msites商家列表(根据经纬度) query参数类型
 export const reqShops = ({latitude,longitude}) => ajax('/api/shops',{latitude,longitude})
 
-//获取图片验证码
-export const reqCaptchas = () => ajax('/api/captchas')
-
-//账号密码登录
-export const accountLogin = (name,pwd,captcha) => ajax('/api/login_pwd',{
-  name,
-  pwd,
-  captcha
-},'POST')
-
-//发送短信验证码
-export const reqPhone = (phone) => ajax('/api/sendcode',{phone})
-
-//手机号、验证码登录
-export const reqPhoneCaptchas = ({phone,code}) => ajax('/api/login_sms',{phone,code},'POST')
-
-//根据会话获取用户信息
-export const reqUser = () => ajax('/api/userinfo')
+// //获取图片验证码
+// export const reqCaptchas = () => ajax('/api/captchas')
+//
+// //账号密码登录
+// export const accountLogin = (name,pwd,captcha) => ajax('/api/login_pwd',{
+//   name,
+//   pwd,
+//   captcha
+// },'POST')
+//
+// //发送短信验证码
+// export const reqPhone = (phone) => ajax('/api/sendcode',{phone})
+//
+// //手机号、验证码登录
+// export const reqPhoneCaptchas = ({phone,code}) => ajax('/api/login_sms',{phone,code},'POST')
+//
+// //根据会话获取用户信息
+// export const reqUser = () => ajax('/api/userinfo')

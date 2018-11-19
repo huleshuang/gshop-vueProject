@@ -1,36 +1,47 @@
+/*
+用于发送ajax请求的函数
+包装axios
+函数的返回值是promise对象
+ */
 import axios from 'axios'
 
-export default function ajax (url='',data={},type = 'GET') {
-  return new Promise(function (reslove,reject) {
+export default function ajax(url, data={}, method='GET') {
+
+  return new Promise((resolve, reject) => {
     let promise
-
-    if(type.toUpperCase() === 'GET'){
-      //准备url query参数数据
-      let dataStr = '' //用于数据拼接字符串
-
-      //遍历对象数据返回数组
-      Object.keys(data).forEach(key=>{
-        dataStr+=key+'='+data[key]+'&'
+    if(method==='GET') {
+      //return axios.get(url, {params: data})
+      // 拼query请求参数串
+      let queryStr = ''
+      Object.keys(data).forEach(key => {
+        const value = data[key]
+        queryStr += `${key}=${value}&`
       })
+      // let queryStr = Object.keys(data).reduce((pre, key) => pre + `${key}=${data[key]}&`, '')
 
-      if(data !== ''){
-        dataStr = dataStr.substring(0,dataStr.lastIndexOf('&'))
-        url = url + '?' + dataStr
+      if(queryStr!=='') { // username=tom&password=123&
+        queryStr = queryStr.substring(0, queryStr.length-1) // username=tom&password=123
+        url += '?' + queryStr  // /login/?username=tom&password=123
       }
-
-      promise = axios.get(url)
-    }else{
-      //发送请求
-      promise = axios.post(url,data)
+      promise = axios.get(url) // url?username=tom&password=123
+      // return axios.get(url, {params: data}) // url?username=tom&password=123
+    } else {
+      promise = axios.post(url, data)
     }
-
-
-    promise.then(response=>{
-      resolve(response.data)
-    })
-      .catch(error=>{
+    promise
+      .then((response) => {
+        resolve(response.data)
+      })
+      .catch(error => {
         reject(error)
       })
-
   })
+
 }
+
+/*async function test() {
+  const result = await ajax('/login', {name: 'Tom', pwd: '123'}, 'POST')  // response.data
+  if(result.code===0) {
+
+  }
+}*/
