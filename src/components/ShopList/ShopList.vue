@@ -15,13 +15,9 @@
             </section>
             <section class="shop_rating_order">
               <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item half"></span>
-                  <span class="star-item off"></span>
-                </div>
+
+                <Star :size="24" :score="item.rating"/>
+
                 <div class="rating_section">
                   {{item.rating}}
                 </div>
@@ -55,12 +51,16 @@
 </template>
 
 <script>
+import Star from '../../components/Star/Star'
 import {mapState} from 'vuex'
 export default {
   data() {
     return {
       imgBaseUrl: 'https://fuss10.elemecdn.com'
     }
+  },
+  components: {
+    Star
   },
   computed: {
     ...mapState(['shops'])
