@@ -36,6 +36,10 @@ export const reqUserInfo = () =>ajax('/api/userinfo')
 //退出当前登录
 export const reqLogout = () => ajax('/api/logout')
 
+export const reqShopInfo = () => ajax('/info')
+export const reqShopGoods = () => ajax('/goods')
+export const reqShopRatings = () => ajax('/ratings')
+
 // //获取图片验证码
 // export const reqCaptchas = () => ajax('/api/captchas')
 //
