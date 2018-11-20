@@ -17,21 +17,25 @@ export const reqCategorys = () => ajax('/api/index_category')
 // 获取msites商家列表(根据经纬度) query参数类型
 export const reqShops = ({latitude,longitude}) => ajax('/api/shops',{latitude,longitude})
 
+//发送短信验证码
+export const reqPhone = (phone) =>ajax('/api/sendcode',{phone})
+
+//账号密码，图片验证码登录
+export const reqUserLogin = ({name, pwd, captcha}) => ajax('/api/login_pwd',{
+  name,
+  pwd,
+  captcha
+},'POST')
+
+//手机号、短信验证码登录
+export const reqSmsLogin = (phone, code)=>ajax('/api/login_sms',{phone,code},'POST')
+
+//获取当前用户会话信息
+export const reqUserInfo = () =>ajax('/api/userinfo')
+
+//退出当前登录
+export const reqLogout = () => ajax('/api/logout')
+
 // //获取图片验证码
 // export const reqCaptchas = () => ajax('/api/captchas')
 //
-// //账号密码登录
-// export const accountLogin = (name,pwd,captcha) => ajax('/api/login_pwd',{
-//   name,
-//   pwd,
-//   captcha
-// },'POST')
-//
-// //发送短信验证码
-// export const reqPhone = (phone) => ajax('/api/sendcode',{phone})
-//
-// //手机号、验证码登录
-// export const reqPhoneCaptchas = ({phone,code}) => ajax('/api/login_sms',{phone,code},'POST')
-//
-// //根据会话获取用户信息
-// export const reqUser = () => ajax('/api/userinfo')

@@ -4,9 +4,12 @@ import router from './router/index'
 import TopHeader from './components/TopHeader/HeaderTop'
 
 import store from './store'
+import {Button} from 'mint-ui'
 
 //注册全局组件
 Vue.component('TopHeader', TopHeader)
+//注册
+Vue.component(Button.name,Button)
 
 /* eslint-disable no-new */
 new Vue({

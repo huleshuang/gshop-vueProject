@@ -12,9 +12,13 @@ export default {
     FooterGuide
   },
 
-  //做异步请求的处理操作 外卖首页Msite
+  //做异步请求的处理操作 外卖首页Msite 一上来就加载
   created() {
+    //获取异步address
     this.$store.dispatch('getAddress')
+
+    //异步获取登录用户信息
+    this.$store.dispatch('getUserInfo')
   }
 
 }
