@@ -1,8 +1,8 @@
 /*
  异步请求处理
  */
-import {reqAddress,reqCategorys,reqShops,reqUserInfo,reqLogin} from "../api";
-import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER_INFO} from './mutation-types'
+import {reqAddress,reqCategorys,reqShops,reqUserInfo,reqLogin,reqLogout} from "../api";
+import {RECEIVE_ADDRESS,RECEIVE_CATEGORYS,RECEIVE_SHOPS,RECEIVE_USER_INFO,RESET_USER_INFO} from './mutation-types'
 
 export default {
   //异步获取地址
@@ -50,5 +50,11 @@ export default {
     }
   },
 
-  async
+  //异步退出登录
+  async logout({commit}) {
+    const result = await reqLogout()
+    if(result.code===0){
+      commit(RESET_USER_INFO)
+    }
+  }
 }
