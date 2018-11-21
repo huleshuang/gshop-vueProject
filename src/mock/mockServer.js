@@ -2,7 +2,7 @@
 使用mockjs提供mock数据接口
  */
 import Mock from 'mockjs'
-import data from './data'  // webapck在打包会自动解析成对应的js对象/数组
+import data from './data.json'  // webapck在打包会自动解析成对应的js对象/数组
 
 // Mock.mock(url,template)
 Mock.mock('/info', {code: 0, data: data.info})

@@ -11,7 +11,7 @@ Vue.component('TopHeader', TopHeader)
 //注册
 Vue.component(Button.name,Button)
 
-// import './mock/mockServer'
+import './mock/mockServer'
 
 /* eslint-disable no-new */
 new Vue({
