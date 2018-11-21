@@ -1,13 +1,14 @@
 <template>
   <div class="shop-header">
     <nav class="shop-nav"
-         :style="{backgroundImage:`url(${info.bgImg})`}">
+         :style="{backgroundImage: `url(${info.bgImg})`}">
       <a class="back" @click="$router.back()">
         <i class="iconfont icon-arrow_left"/>
       </a>
     </nav>
-    <div class="shop-content">
-      <img :src="info.avatar" class="content-image" @click="isShowBulletin=true">
+
+    <div class="shop-content" @click="isShowBulletin=true">
+      <img :src="info.avatar" class="content-image">
       <div class="header-content">
         <h2 class="content-title">
           <span class="content-tag">
@@ -17,17 +18,19 @@
           <i class="content-icon"></i>
         </h2>
         <div class="shop-message">
-          <span class="shop-message-detail">5</span>
+          <span class="shop-message-detail">{{info.score}}</span>
           <span class="shop-message-detail">月售{{info.sellCount}}单</span>
           <span class="shop-message-detail">
             {{info.description}}
             <span>约{{info.deliveryTime}}分钟</span>
           </span>
-          <span class="shop-message-detail">距离{{info.distance}}m</span>
+          <span class="shop-message-detail">距离{{info.distance}}</span>
         </div>
         <p class="shop-notice">{{info.bulletin}}</p>
       </div>
     </div>
+
+
     <div class="shop-header-discounts" v-if="info.supports" @click="isShowSupport=true">
       <div class="discounts-left">
         <div class="activity" :class="supportClasses[info.supports[0].type]">
@@ -42,50 +45,52 @@
       </div>
     </div>
 
-    <!--弹出框-->
-    <div class="shop-brief-modal" v-show="isShowBulletin">
-      <div class="brief-modal-content">
-        <h2 class="content-title">
+    <transition name="fade">
+      <div class="shop-brief-modal" v-show="isShowBulletin">
+        <div class="brief-modal-content">
+          <h2 class="content-title">
           <span class="content-tag">
             <span class="mini-tag">品牌</span>
           </span>
-          <span class="content-name">{{info.name}}</span>
-        </h2>
-        <ul class="brief-modal-msg">
-          <li>
-            <h3>{{info.score}}</h3>
-            <p>评分</p>
-          </li>
-          <li>
-            <h3>{{info.sellCount}}</h3>
-            <p>月售</p>
-          </li>
-          <li>
-            <h3>{{info.description}}</h3>
-            <p>约{{info.deliveryTime}}分钟</p>
-          </li>
-          <li>
-            <h3>{{info.deliveryPrice}}元元</h3>
-            <p>配送费用</p>
-          </li>
-          <li>
-            <h3>{{info.distance}}m</h3>
-            <p>距离</p>
-          </li>
-        </ul>
-        <h3 class="brief-modal-title">
-          <span>公告</span></h3>
-        <div class="brief-modal-notice">
-          {{info.bulletin}}
+            <span class="content-name">{{info.name}}</span>
+          </h2>
+          <ul class="brief-modal-msg">
+            <li>
+              <h3>{{info.score}}</h3>
+              <p>评分</p>
+            </li>
+            <li>
+              <h3>{{info.sellCount}}单</h3>
+              <p>月售</p>
+            </li>
+            <li>
+              <h3>硅谷专送</h3>
+              <p>约{{info.deliveryTime}}分钟</p>
+            </li>
+            <li>
+              <h3>{{info.deliveryPrice}}元</h3>
+              <p>配送费用</p>
+            </li>
+            <li>
+              <h3>{{info.distance}}</h3>
+              <p>距离</p>
+            </li>
+          </ul>
+          <h3 class="brief-modal-title">
+            <span>公告</span></h3>
+          <div class="brief-modal-notice">
+            {{info.bulletin}}
+          </div>
+          <div class="mask-footer" @click="isShowBulletin=false">
+            <span class="iconfont icon-close"></span>
+          </div>
         </div>
-        <div class="mask-footer" @click="isShowBulletin=false">
-          <span class="iconfont icon-close"></span>
-        </div>
+        <div class="brief-modal-cover"></div>
       </div>
-      <div class="brief-modal-cover"></div>
-    </div>
+    </transition>
 
-    <!--底部显示-->
+
+
     <div class="activity-sheet" v-show="isShowSupport">
       <div class="activity-sheet-content">
         <h2 class="activity-sheet-title">
@@ -99,7 +104,7 @@
             <span class="activity-content">{{support.content}}</span>
           </li>
         </ul>
-        <div class="activity-sheet-close"  @click="isShowSupport=false">
+        <div class="activity-sheet-close" @click="isShowSupport=false">
           <span class="iconfont icon-close"></span>
         </div>
       </div>
@@ -107,23 +112,25 @@
     </div>
   </div>
 </template>
+
 <script>
-import {mapState} from 'vuex'
-export default {
-  data () {
-    return {
-      supportClasses: ['activity-green', 'activity-red', 'activity-orange'],
-      isShowBulletin: false,
-      isShowSupport: false
+  import {mapState} from 'vuex'
+
+  export default {
+    data () {
+      return {
+        supportClasses: ['activity-green', 'activity-red', 'activity-orange'],
+        isShowBulletin: false,
+        isShowSupport: false
+      }
+    },
+    computed: {
+      ...mapState(['info'])
     }
-  },
-  computed : {
-    ...mapState(['info'])
   }
-}
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl"
 
   .shop-header
@@ -313,6 +320,10 @@ export default {
       z-index 52
       flex-direction column
       color #333
+      &.fade-enter-active, &.fade-leave-active
+        transition opacity 1s
+      &.fade-enter, &.fade-leave-to
+        opacity 0
       .brief-modal-cover
         position absolute
         width 100%
