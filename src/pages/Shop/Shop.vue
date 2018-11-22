@@ -4,14 +4,13 @@
 
     <div class="tab">
       <div class="tab-item">
-        <!--这里添加了一个replace说明：不加replace以下三者之间的切换会有记录，加了replace之后 返回直接跳转到Shop主页-->
-        <router-link to="/shop/shopGoods" replace>点餐</router-link>
+        <router-link to="/shop/goods" replace>点餐</router-link>
       </div>
       <div class="tab-item">
-       <router-link to="/shop/shopRatings" replace>评价</router-link>
+        <router-link to="/shop/ratings" replace>评价</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/shop/shopInfo" replace>商家</router-link>
+        <router-link to="/shop/info" replace>商家</router-link>
       </div>
     </div>
 
@@ -20,11 +19,11 @@
 </template>
 
 <script>
-  import ShopHeader from '../../components/ShopHeader/ShopHeader'
+  import ShopHeader from '../../components/ShopHeader/ShopHeader.vue'
 
   export default {
 
-    mounted() {
+    mounted () {
       this.$store.dispatch('getShopInfo')
     },
 
@@ -34,8 +33,9 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus"  scoped>
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl"
+
   .tab
     height 40px
     line-height 40px
