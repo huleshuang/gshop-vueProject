@@ -92,7 +92,7 @@
           // scrollY大于或等于当前top && 小于下一个top
           return scrollY>=top && scrollY<tops[index+1]
         })
-        // 最后一步，如果下标变化了，那么将index对应的左侧li滚动到最上面(尽量)
+        // 如果下标变化了
         if(this.index!==index && this.leftScroll) {
           this.index = index
           // 将index对应的左侧li滚动到最上面(尽量)
@@ -146,7 +146,6 @@
         console.log('tops', tops)
       },
 
-      //点击每一个分类li 坐标，
       clickItem (index) {
         // 得到目标位置的滚动坐标
         const y = -this.tops[index]
