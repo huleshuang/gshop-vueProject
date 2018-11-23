@@ -24,12 +24,12 @@
             {{info.description}}
             <span>约{{info.deliveryTime}}分钟</span>
           </span>
+
           <span class="shop-message-detail">距离{{info.distance}}</span>
         </div>
         <p class="shop-notice">{{info.bulletin}}</p>
       </div>
     </div>
-
 
     <div class="shop-header-discounts" v-if="info.supports" @click="isShowSupport=true">
       <div class="discounts-left">
@@ -86,11 +86,10 @@
           </div>
         </div>
         <div class="brief-modal-cover"></div>
-      </div>
+    </div>
     </transition>
 
-
-
+    <!--底部显示-->
     <div class="activity-sheet" v-show="isShowSupport">
       <div class="activity-sheet-content">
         <h2 class="activity-sheet-title">
@@ -104,7 +103,7 @@
             <span class="activity-content">{{support.content}}</span>
           </li>
         </ul>
-        <div class="activity-sheet-close" @click="isShowSupport=false">
+        <div class="activity-sheet-close"  @click="isShowSupport=false">
           <span class="iconfont icon-close"></span>
         </div>
       </div>
@@ -112,22 +111,20 @@
     </div>
   </div>
 </template>
-
 <script>
-  import {mapState} from 'vuex'
-
-  export default {
-    data () {
-      return {
-        supportClasses: ['activity-green', 'activity-red', 'activity-orange'],
-        isShowBulletin: false,
-        isShowSupport: false
-      }
-    },
-    computed: {
-      ...mapState(['info'])
+import {mapState} from 'vuex'
+export default {
+  data () {
+    return {
+      supportClasses: ['activity-green', 'activity-red', 'activity-orange'],
+      isShowBulletin: false,
+      isShowSupport: false
     }
+  },
+  computed : {
+    ...mapState(['info'])
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

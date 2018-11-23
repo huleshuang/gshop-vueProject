@@ -10,22 +10,18 @@
 
 <script>
   export default {
-    props: {
-      // count: Number,  // food中有count
-      food: Object
+    props :{
+      food:Object
     },
-
     methods: {
       updateFoodCount (isAdd) {
-        this.$store.dispatch('updateFoodCount', {food: this.food, isAdd})
+        this.$store.dispatch('updateFoodCount',{food: this.food, isAdd})
       }
     }
   }
 </script>
-
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixins.styl"
-
   .cartcontrol
     font-size: 0
     .cart-decrease
@@ -41,9 +37,9 @@
       line-height 24px
       font-size 24px
       color $green
-      &.move-enter-active, &.move-leave-active
+      &.move-enter-active,&.move-leave-active
         transition all .5s
-      &.move-enter, &.move-leave-to
+      &.move-enter,&.move-leave-to
         opacity 0
         transform translateX(20px) rotate(180deg)
     .cart-count

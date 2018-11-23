@@ -1,3 +1,4 @@
+
 /*
 Vuex最核心的管理对象
  */
@@ -12,4 +13,5 @@ export default {
   totalPrice (state) {
     return state.cartFoods.reduce((pre, food) => pre + food.count*food.price, 0)
   },
+
 }

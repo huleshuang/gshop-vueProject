@@ -25,7 +25,7 @@
         </div>
         <div class="list-content">
           <ul>
-            <li class="food" v-for="(food, index) in cartFoods" :key="index">
+            <li class="food" v-for="(food,index) in cartFoods" :key="index">
               <span class="name">{{food.name}}</span>
               <div class="price"><span>￥{{food.price}}</span></div>
               <div class="cartcontrol-wrapper">
@@ -41,25 +41,23 @@
 </template>
 
 <script>
-  import {mapState, mapGetters} from 'vuex'
+  import {mapState,mapGetters} from 'vuex'
   import CartControl from '../CartControl/CartControl.vue'
   export default {
-
-    data () {
+    data(){
       return {
         isShow: false
       }
     },
     computed: {
-      ...mapState(['cartFoods', 'info']),
-      ...mapGetters(['totalCount', 'totalPrice']),
-      payClass () {
+      ...mapState(['cartFoods','info']),
+      ...mapGetters(['totalCount','totalPrice']),
+      payClass(){
         const {totalPrice} = this
         const {minPrice} = this.info
         return totalPrice<minPrice ? 'not-enough' : 'enough'
       },
-
-      payText () {
+      payText() {
         const {totalPrice} = this
         const {minPrice} = this.info
         if(totalPrice===0) {
@@ -69,11 +67,10 @@
         } else {
           return '去结算'
         }
-      },
+      }
     },
-
     methods: {
-      toggleShow () {
+      toggleShow(){
         this.isShow = !this.isShow
       }
     },
@@ -234,4 +231,5 @@
       transition: all 0.5s
     &.fade-enter, &.fade-leave-to
       opacity: 0
+
 </style>

@@ -1,6 +1,7 @@
 /**
  * mutations 直接更新state数据
  */
+
 import Vue from 'vue'
 //引入常量类型
 import {
